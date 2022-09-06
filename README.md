@@ -16,10 +16,21 @@ npm run dev
 ```
 <br>
 
-## Pushing
-
-Create a Pull Request first. Your code will be reviewed by the team. 
+## 🏎 Pushing
+0. Before beginning the push process, please run _both_ the code formatter and linter.
+```
+npm run lint
+npm run format
+```
 <br>
 
-### Note on commits
-Please follow commit conventions! Read this guide for ideas: https://www.conventionalcommits.org/en/v1.0.0/ and then follow up your reading with this, to understand why commit 0 is the way it is: https://gist.github.com/fguisso/1403912bd1b8ff53f4a7919f0bb9399a
+1. Create new branch with changes
+2. Commit changes. Please see 'Note on commits' section below.
+3. Publish branch to GitHub
+4. Create a PR
+5. Wait for someone on the team to review
+
+<br>
+
+### ✍️ Note on commits
+Please follow commit conventions. Here's the official guide: https://www.conventionalcommits.org/en/v1.0.0/
