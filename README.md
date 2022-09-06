@@ -1,38 +1,25 @@
-# create-svelte
-
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+# 🏁 Setup
 
 ## Developing
+After cloning, install dependencies:
+```
+npm i
+```
+<br>
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+⚠️ Get required setup files from team.
+<br>
 
-```bash
+Then run the application:
+```
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
+<br>
 
-## Building
+## Pushing
 
-To create a production version of your app:
+Create a Pull Request first. Your code will be reviewed by the team. 
+<br>
 
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+### Note on commits
+Please follow commit conventions! Read this guide for ideas: https://www.conventionalcommits.org/en/v1.0.0/ and then follow up your reading with this, to understand why commit 0 is the way it is: https://gist.github.com/fguisso/1403912bd1b8ff53f4a7919f0bb9399a
