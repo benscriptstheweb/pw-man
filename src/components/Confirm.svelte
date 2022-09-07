@@ -31,6 +31,7 @@
 <style>
   .confirm-box {
     position: absolute;
+    z-index: 1;
     top: 100px;
     height: 230px;
     background-color: black;
