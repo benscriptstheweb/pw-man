@@ -21,9 +21,9 @@
       <p>An overview of your shifts.</p>
     {/if}
   </div>
-  <Button kind="tertiary" size="lg" on:click={formIsOpened}>
+  <div on:click={formIsOpened} class="add-shift">
     <Add size={32} />
-  </Button>
+  </div>
 </div>
 
 <style>
@@ -45,6 +45,7 @@
   .banner {
     display: flex;
     flex-direction: row;
+    align-items: center;
     width: 300px;
     margin: 80px auto 40px auto;
   }
@@ -54,5 +55,16 @@
   }
   .banner-text h2 {
     font-weight: bold;
+  }
+  .add-shift {
+    border-radius: 10px;
+    transition: 0.2s;
+    background-color: #5184b7;
+    color: white;
+    cursor: pointer;
+  }
+  .add-shift:hover {
+    transform: scale(1.1);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
 </style>
