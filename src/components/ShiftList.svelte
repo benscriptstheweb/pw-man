@@ -89,11 +89,13 @@
               minute: '2-digit',
             })}</Column>
           <Column>{shift.location}</Column>
-          <div on:click={() => confirmDelete(shift.id)} class="delete-row">
-            <TrashCan />
-          </div>
-          <div on:click={() => showShiftFleet(shift.date, shift.location)} class="expand-row">
-            <PedestrianFamily />
+          <div class="shift-btn-group">
+            <div on:click={() => confirmDelete(shift.id)} class="btn delete-row">
+              <TrashCan />
+            </div>
+            <div on:click={() => showShiftFleet(shift.date, shift.location)} class="btn expand-row">
+              <PedestrianFamily />
+            </div>
           </div>
         </Row>
         <hr />
@@ -116,15 +118,26 @@
     background-color: rgb(237, 237, 237);
     padding: 20px;
   }
+  .shift-btn-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .btn {
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .btn:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transform: scale(1.1);
+  }
   .delete-row {
     cursor: pointer;
-    padding: 20px;
     color: rgb(255, 137, 137);
-    transition: 0.1s;
+    transition: 0.2s;
   }
   .expand-row {
     cursor: pointer;
-    padding: 20px;
     color: black;
     transition: 0.2s;
   }
