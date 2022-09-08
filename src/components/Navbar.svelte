@@ -44,10 +44,10 @@
     cursor: pointer;
     padding: 5px;
     border-radius: 10px;
-    transition: 0.5s;
+    transition: 0.2s;
   }
   #logout-user:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
   .admin-tag {

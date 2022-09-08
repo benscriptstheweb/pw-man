@@ -87,7 +87,6 @@
 
   onMount(async () => {
     publisher = await getSignedInUser($auth.currentUser);
-    console.log(publisher);
   });
 
   let comboSelection;
