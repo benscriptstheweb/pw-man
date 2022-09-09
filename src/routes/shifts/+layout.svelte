@@ -61,7 +61,9 @@
 {:else if !$loading && !$isRegistered}
   <div class="not-signed">
     <h2 class="text">Please wait</h2>
-    <p class="text">Your administrator is completing your registration. Please refresh your page after.</p>
+    <p class="text">
+      Your administrator is completing your registration. Please refresh your page after.
+    </p>
   </div>
 {/if}
 
@@ -73,7 +75,7 @@
     margin-top: 200px;
   }
   .text {
-        margin: 10px;
-        width: 250px;
-    }
+    margin: 10px;
+    width: 250px;
+  }
 </style>

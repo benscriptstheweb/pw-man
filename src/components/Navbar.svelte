@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte';
-  import Pedestrian from 'carbon-icons-svelte/lib/Pedestrian.svelte'
-  import Home from 'carbon-icons-svelte/lib/Home.svelte'
+  import Pedestrian from 'carbon-icons-svelte/lib/Pedestrian.svelte';
+  import Home from 'carbon-icons-svelte/lib/Home.svelte';
   import { Tag } from 'carbon-components-svelte';
   import { isRegistered, userIsSignedIn } from '../stores/publishers';
 
@@ -25,9 +25,9 @@
 <div class="btn-group">
   <div id="logout-user" class="btn" on:click={logoutUser}>
     {#if !$isRegistered || !$userIsSignedIn}
-    <Home size={24} />
+      <Home size={24} />
     {:else}
-    <Pedestrian size={24} />
+      <Pedestrian size={24} />
     {/if}
   </div>
   {#if displayTag}
