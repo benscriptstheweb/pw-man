@@ -12,7 +12,7 @@
   import { getSignedInUser } from '../../controllers/publishers';
   import Navbar from '../../components/Navbar.svelte';
   import { goto } from '$app/navigation';
-  import { Campsite, UserMultiple } from 'carbon-icons-svelte';
+  import { Lifesaver } from 'carbon-icons-svelte';
   import { Loading } from 'carbon-components-svelte';
 
   const logout = async () => {
@@ -43,9 +43,11 @@
 
     $loading = false;
   });
+
+  $: showTag = publisher ? true : false;
 </script>
 
-<Navbar {publisherName} adminStatus={$adminStatus} on:loggedOut={logout} displayTag={false} />
+<Navbar {publisherName} adminStatus={$adminStatus} on:loggedOut={logout} displayTag={showTag} />
 
 {#if $loading}
   <Loading />
@@ -53,27 +55,25 @@
   <slot />
 {:else if !$loading && !$userIsSignedIn}
   <div class="not-signed">
-    <Campsite size={32} />
-    <p>Sorry, the page you are looking for is not available.</p>
+    <Lifesaver size={32} />
+    <h2 class="text">501</h2>
   </div>
 {:else if !$loading && !$isRegistered}
   <div class="not-signed">
-    <UserMultiple size={32} />
-    <p>Please wait for your administrator to complete your registration.</p>
+    <h2 class="text">Please wait</h2>
+    <p class="text">Your administrator is completing your registration. Please refresh your page after.</p>
   </div>
 {/if}
 
 <style>
-  :global(body) {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  }
   .not-signed {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 200px;
   }
-  .not-signed p {
-    margin-top: 20px;
-  }
+  .text {
+        margin: 10px;
+        width: 250px;
+    }
 </style>
