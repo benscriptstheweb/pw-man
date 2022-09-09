@@ -1,6 +1,5 @@
 <script>
   import Add from 'carbon-icons-svelte/lib/Add.svelte';
-  import { Button } from 'carbon-components-svelte';
   import { createEventDispatcher } from 'svelte';
 
   export let adminStatus = false;
