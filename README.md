@@ -42,4 +42,4 @@ npm run format
 
 ### ✍️ Note on commits
 
-Please follow commit conventions. Here's the official guide: https://www.conventionalcommits.org/en/v1.0.0/
+Please follow commit conventions. Here's the official guide: https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13
