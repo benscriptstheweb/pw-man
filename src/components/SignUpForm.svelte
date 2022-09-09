@@ -49,11 +49,13 @@
     emailFieldEmpty = email === '' ? true : false;
     passwordFieldEmpty = password === '' ? true : false;
 
-    await createUserWithEmailAndPassword($auth, email, password);
+    await createUserWithEmailAndPassword($auth, email, password).catch(() => {
+      return;
+    });
 
     createPublisher({
       id: latestId + 1,
-      email: email,
+      email: '',
       first_name: firstName,
       last_name: lastName,
       role: Number(role),
