@@ -70,7 +70,11 @@
     float: right;
     cursor: pointer;
   }
+  .data-table::-webkit-scrollbar {
+    display: none;
+  }
   .data-table {
+    -ms-overflow-style: none;
     overflow: scroll;
     max-height: 400px;
     margin: 20px auto 0 auto;

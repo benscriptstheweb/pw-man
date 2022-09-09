@@ -110,7 +110,11 @@
   .msg-no-shift {
     color: gray;
   }
+  .data-table::-webkit-scrollbar {
+    display: none;
+  }
   .data-table {
+    -ms-overflow-style: none;
     overflow: scroll;
     max-height: 400px;
     max-width: 550px;
