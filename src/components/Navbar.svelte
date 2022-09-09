@@ -1,12 +1,21 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   import Pedestrian from 'carbon-icons-svelte/lib/Pedestrian.svelte';
+  import Home from 'carbon-icons-svelte/lib/Home.svelte';
   import { Tag } from 'carbon-components-svelte';
+  import { isRegistered, userIsSignedIn } from '../stores/publishers';
 
   export let publisherName: string;
   export let adminStatus = false;
+  export let displayTag = false;
 
   let dispatch = createEventDispatcher();
+
+  onMount(() => {
+    if (publisherName === undefined) {
+      publisherName = 'Unregistered User';
+    }
+  });
 
   const logoutUser = () => {
     dispatch('loggedOut');
@@ -15,16 +24,22 @@
 
 <div class="btn-group">
   <div id="logout-user" class="btn" on:click={logoutUser}>
-    <Pedestrian size={24} />
+    {#if !$isRegistered || !$userIsSignedIn}
+      <Home size={24} />
+    {:else}
+      <Pedestrian size={24} />
+    {/if}
   </div>
-  {#if adminStatus}
-    <div class="btn admin-tag">
-      <Tag type="green">Admin</Tag>
-    </div>
-  {:else}
-    <div class="btn publisher-tag">
-      <Tag type="cyan">{publisherName}</Tag>
-    </div>
+  {#if displayTag}
+    {#if adminStatus}
+      <div class="btn admin-tag">
+        <Tag type="green">Admin</Tag>
+      </div>
+    {:else}
+      <div class="btn publisher-tag">
+        <Tag type="cyan">{publisherName}</Tag>
+      </div>
+    {/if}
   {/if}
 </div>
 
