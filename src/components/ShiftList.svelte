@@ -109,6 +109,7 @@
 <style>
   .msg-no-shift {
     color: gray;
+    max-width: 85%;
   }
   .data-table::-webkit-scrollbar {
     display: none;
