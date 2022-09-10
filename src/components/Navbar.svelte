@@ -4,6 +4,7 @@
   import { Tag } from 'carbon-components-svelte';
   import { isRegistered, userIsSignedIn } from '../stores/publishers';
   import { page } from '$app/stores';
+  import { goto } from '$app/navigation';
 
   export let publisherName: string;
   export let adminStatus = false;
@@ -21,9 +22,13 @@
     dispatch('loggedOut');
   };
 
-  const selectedRoute = (routeId: string) => {
+  $: selectedRoute = (routeId: string) => {
     return $page.routeId === routeId ? 'border-bottom: 2px solid black' : '';
   };
+
+  const gotoRoute = (routeId: string) => {
+    goto(`/${routeId}`);
+  }
 </script>
 
 <div class="container">
@@ -43,13 +48,13 @@
 
     {#if $isRegistered && $userIsSignedIn}
       <div class="locators">
-        <div class="btn" style={selectedRoute('shifts')}>
+        <div class="btn" style={selectedRoute('shifts')} on:click={() => gotoRoute('shifts')}>
           <CalendarHeatMap size={20} />
           <p>Shifts</p>
         </div>
       </div>
       <div class="locators">
-        <div class="btn">
+        <div class="btn" style={selectedRoute('locations')} on:click={() => gotoRoute('locations')}>
           <Map size={20} />
           <p>Locations</p>
         </div>
