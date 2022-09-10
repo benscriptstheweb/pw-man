@@ -1,16 +1,16 @@
 <script lang="ts">
-  import { createEventDispatcher, onMount } from 'svelte';
+  import { onMount } from 'svelte';
   import { Pedestrian, Home, CalendarHeatMap, Map } from 'carbon-icons-svelte';
   import { Tag } from 'carbon-components-svelte';
   import { isRegistered, userIsSignedIn } from '../stores/publishers';
+  import { auth } from '../stores/auth';
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';
+  import { signOut } from 'firebase/auth';
 
   export let publisherName: string;
   export let adminStatus = false;
   export let displayTag = false;
-
-  let dispatch = createEventDispatcher();
 
   onMount(() => {
     if (publisherName === undefined) {
@@ -18,8 +18,9 @@
     }
   });
 
-  const logoutUser = () => {
-    dispatch('loggedOut');
+  const logoutUser = async () => {
+    signOut($auth);
+    goto('/');
   };
 
   $: selectedRoute = (routeId: string) => {
@@ -28,7 +29,7 @@
 
   const gotoRoute = (routeId: string) => {
     goto(`/${routeId}`);
-  }
+  };
 </script>
 
 <div class="container">
@@ -106,7 +107,6 @@
   }
 
   .name-tag {
-    margin: 8px;
-    align-self: flex-end;
+    margin: 15px;
   }
 </style>
