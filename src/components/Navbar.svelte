@@ -55,7 +55,10 @@
         </div>
       </div>
       <div class="locators">
-        <div class="btn" style={selectedRoute('locations')} on:click={() => gotoRoute('locations')}>
+        <div
+          class="btn"
+          style={selectedRoute('shifts/locations')}
+          on:click={() => gotoRoute('shifts/locations')}>
           <Map size={20} />
           <p>Locations</p>
         </div>
