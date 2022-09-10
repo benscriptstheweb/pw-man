@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onAuthStateChanged, signOut } from 'firebase/auth';
+  import { onAuthStateChanged } from 'firebase/auth';
   import { onMount } from 'svelte';
   import { auth } from '../../stores/auth';
   import {
@@ -10,20 +10,10 @@
     isRegistered,
   } from '../../stores/publishers';
   import { getSignedInUser } from '../../controllers/publishers';
-  import Navbar from '../../components/Navbar.svelte';
-  import { goto } from '$app/navigation';
   import { Lifesaver } from 'carbon-icons-svelte';
   import { Loading } from 'carbon-components-svelte';
 
-  const logout = async () => {
-    signOut($auth);
-    goto('/');
-  };
-
-  let publisherName: string;
   let publisher;
-
-  $loading = true;
 
   onMount(async () => {
     onAuthStateChanged($auth, async (sameUser) => {
@@ -33,21 +23,16 @@
     });
 
     if ($auth.currentUser === null) {
-      $userIsSignedIn = false;
+      userIsSignedIn.set(false);
     } else {
       publisher = await getSignedInUser($auth.currentUser);
-      $isRegistered = $publishers.some((e) => e.email === $auth.currentUser.email) ? true : false;
-      $adminStatus = publisher?.role === 0;
-      publisherName = publisher?.text;
+      isRegistered.set($publishers.some((e) => e.email === $auth.currentUser.email) ? true : false);
+      adminStatus.set(publisher?.role === 0);
     }
 
     $loading = false;
   });
-
-  $: showTag = publisher ? true : false;
 </script>
-
-<Navbar {publisherName} adminStatus={$adminStatus} on:loggedOut={logout} displayTag={showTag} />
 
 {#if $loading}
   <Loading />
@@ -68,14 +53,16 @@
 {/if}
 
 <style>
+  .text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
   .not-signed {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 200px;
-  }
-  .text {
-    margin: 10px;
-    width: 250px;
   }
 </style>
