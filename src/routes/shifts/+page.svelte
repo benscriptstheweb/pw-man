@@ -1,6 +1,6 @@
 <script lang="ts">
   import ShiftForm from '../../components/ShiftForm.svelte';
-  import LocationBanner from '../../components/LocationBanner.svelte';
+  import ShiftTitle from '../../components/ShiftTitle.svelte';
   import ShiftList from '../../components/ShiftList.svelte';
   import { ToastNotification } from 'carbon-components-svelte';
   import { adminStatus } from '../../stores/publishers';
@@ -39,7 +39,7 @@
 </div>
 
 <div class="content">
-  <LocationBanner adminStatus={$adminStatus} on:formIsOpened={toggleForm} />
+  <ShiftTitle adminStatus={$adminStatus} on:formIsOpened={toggleForm} />
 
   {#if !hidden}
     <ShiftForm

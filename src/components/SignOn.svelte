@@ -110,7 +110,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 200px;
+    margin-top: 150px;
   }
   #logo {
     margin-bottom: 30px;

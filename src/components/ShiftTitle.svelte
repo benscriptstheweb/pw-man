@@ -46,7 +46,7 @@
     flex-direction: row;
     align-items: center;
     width: 300px;
-    margin: 80px auto 40px auto;
+    margin-bottom: 40px;
   }
   .banner-text {
     padding-right: 30px;

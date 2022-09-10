@@ -53,7 +53,7 @@
     position: absolute;
     top: 10%;
     z-index: 1;
-    width: 400px;
+    width: 370px;
     transition: opacity 0.2s ease-in-out;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     background-color: white;
