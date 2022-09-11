@@ -86,14 +86,8 @@
       </div>
 
       <div class="btn-group">
-        <Button kind="ghost" type="submit" on:click={login} class="welcome-login">
-          LOGIN
-        </Button>
-        <Button
-          icon={Add}
-          iconDescription="Sign-Up"
-          on:click={signup}
-          class="welcome-sign" />
+        <Button kind="ghost" type="submit" on:click={login} class="welcome-login">LOGIN</Button>
+        <Button icon={Add} iconDescription="Sign-Up" on:click={signup} class="welcome-sign" />
       </div>
     </Form>
   </div>
