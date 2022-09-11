@@ -86,13 +86,12 @@
       </div>
 
       <div class="btn-group">
-        <Button id="btn-submit" kind="ghost" type="submit" on:click={login} class="welcome-login">
+        <Button kind="ghost" type="submit" on:click={login} class="welcome-login">
           LOGIN
         </Button>
         <Button
           icon={Add}
           iconDescription="Sign-Up"
-          id="btn-submit"
           on:click={signup}
           class="welcome-sign" />
       </div>
