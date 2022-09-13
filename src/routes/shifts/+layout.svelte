@@ -12,8 +12,14 @@
   import { getSignedInUser } from '../../controllers/publishers';
   import { Lifesaver } from 'carbon-icons-svelte';
   import { Loading } from 'carbon-components-svelte';
+  import Navbar from '../../components/Navbar.svelte';
 
+  let publisherName: string;
   let publisher;
+
+  $loading = true;
+
+  $: showTag = publisher ? true : false;
 
   onMount(async () => {
     onAuthStateChanged($auth, async (sameUser) => {
@@ -27,6 +33,7 @@
     } else {
       publisher = await getSignedInUser($auth.currentUser);
       isRegistered.set($publishers.some((e) => e.email === $auth.currentUser.email) ? true : false);
+      publisherName = publisher?.text;
       adminStatus.set(publisher?.role === 0);
     }
 
@@ -34,10 +41,16 @@
   });
 </script>
 
+{#if $auth.currentUser}
+  <Navbar {publisherName} adminStatus={$adminStatus} displayTag={showTag} />
+{/if}
+
 {#if $loading}
-  <Loading />
+<Loading />
 {:else if !$loading && $userIsSignedIn && $isRegistered}
+<div class="content">
   <slot />
+</div>
 {:else if !$loading && !$userIsSignedIn}
   <div class="not-signed">
     <Lifesaver size={32} />
@@ -53,6 +66,9 @@
 {/if}
 
 <style>
+  .content {
+    margin-top: 50px;
+  }
   .text {
     display: flex;
     flex-direction: row;
