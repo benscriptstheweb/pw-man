@@ -67,7 +67,7 @@
 
 <style>
   .content {
-    margin-top: 50px;
+    margin-top: 100px;
   }
   .text {
     display: flex;
