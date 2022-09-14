@@ -17,7 +17,7 @@
         position: relative;
         width: 300px;
         height: 500px;
-        transition: 0.1s;
+        transition: 0.5s;
         cursor: pointer;
     }
     .location-card:hover {
