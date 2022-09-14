@@ -39,6 +39,6 @@
 
 <style>
   .content {
-    margin-top: 100px;
+    margin-top: 120px;
   }
 </style>
