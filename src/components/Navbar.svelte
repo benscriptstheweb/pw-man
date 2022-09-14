@@ -24,7 +24,7 @@
   };
 
   $: selectedRoute = (routeId: string) => {
-    return $page.routeId === routeId ? 'border-bottom: 2px solid black' : '';
+    return $page.routeId === routeId ? 'color: #77b888' : '';
   };
 
   const gotoRoute = (routeId: string) => {
@@ -98,6 +98,7 @@
     align-items: center;
     margin: 20px;
     cursor: pointer;
+    transition: 0.1s;
   }
 
   .btn p {
@@ -110,7 +111,7 @@
   }
 
   .btn:hover {
-    border-bottom: 2px solid black;
+    color: #77b888;
   }
 
   .name-tag {
