@@ -5,7 +5,6 @@
   import {
     publishers,
     adminStatus,
-    loading,
     userIsSignedIn,
     isRegistered,
   } from '../../stores/publishers';
@@ -17,7 +16,7 @@
   let publisherName: string;
   let publisher;
 
-  $loading = true;
+  let loading = true;
 
   $: showTag = publisher ? true : false;
 
@@ -37,26 +36,22 @@
       adminStatus.set(publisher?.role === 0);
     }
 
-    $loading = false;
+    loading = false;
   });
 </script>
 
-{#if $auth.currentUser}
-  <Navbar {publisherName} adminStatus={$adminStatus} displayTag={showTag} />
-{/if}
-
-{#if $loading}
-<Loading />
-{:else if !$loading && $userIsSignedIn && $isRegistered}
+{#if loading}
+  <Loading />
+{:else if !loading && $userIsSignedIn && $isRegistered}
 <div class="content">
   <slot />
 </div>
-{:else if !$loading && !$userIsSignedIn}
+{:else if !loading && !$userIsSignedIn}
   <div class="not-signed">
     <Lifesaver size={32} />
     <h2 class="text">501</h2>
   </div>
-{:else if !$loading && !$isRegistered}
+{:else if !loading && !$isRegistered}
   <div class="not-signed">
     <h2 class="text">Please wait</h2>
     <p class="text">

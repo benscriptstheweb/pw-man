@@ -10,7 +10,6 @@
 
   export let publisherName: string;
   export let adminStatus = false;
-  export let displayTag = false;
 
   onMount(() => {
     if (publisherName === undefined) {
@@ -66,15 +65,13 @@
     {/if}
   </div>
 
-  {#if displayTag}
-    <div class="name-tag">
-      {#if adminStatus}
-        <Tag type="green">Admin</Tag>
-      {:else}
-        <Tag type="cyan">{publisherName}</Tag>
-      {/if}
-    </div>
-  {/if}
+  <div class="name-tag">
+    {#if adminStatus}
+      <Tag type="green">Admin</Tag>
+    {:else}
+      <Tag type="cyan">{publisherName}</Tag>
+    {/if}
+  </div>
 </div>
 
 <style>
