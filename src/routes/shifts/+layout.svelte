@@ -30,8 +30,8 @@
       publisher = await getSignedInUser($auth.currentUser);
       isRegistered.set($publishers.some((e) => e.email === $auth.currentUser.email) ? true : false);
       
-      publisherName = publisher.text;
-      adminStatus.set(publisher.role === 0);
+      publisherName = publisher?.text;
+      adminStatus.set(publisher?.role === 0);
     }
 
     loading = false;
