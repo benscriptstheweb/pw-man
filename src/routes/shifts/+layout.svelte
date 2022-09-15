@@ -18,24 +18,18 @@
 
   let loading = true;
 
-  $: showTag = publisher ? true : false;
-
   onMount(async () => {
-    onAuthStateChanged($auth, async (sameUser) => {
+    onAuthStateChanged($auth, (sameUser) => {
       if (sameUser) {
         userIsSignedIn.set(true);
       }
     });
-
-    if ($auth.currentUser === null) {
-      userIsSignedIn.set(false);
-    } else {
-      publisher = await getSignedInUser($auth.currentUser);
-      isRegistered.set($publishers.some((e) => e.email === $auth.currentUser.email) ? true : false);
-      publisherName = publisher?.text;
-      adminStatus.set(publisher?.role === 0);
-    }
-
+    
+    publisher = await getSignedInUser($auth.currentUser);
+    isRegistered.set($publishers.some((e) => e.email === $auth.currentUser.email) ? true : false);
+    
+    publisherName = publisher.text;
+    adminStatus.set(publisher.role === 0);
     loading = false;
   });
 </script>
@@ -43,9 +37,10 @@
 {#if loading}
   <Loading />
 {:else if !loading && $userIsSignedIn && $isRegistered}
-<div class="content">
-  <slot />
-</div>
+  <Navbar {publisherName} adminStatus={$adminStatus} />
+  <div class="content">
+    <slot />
+  </div>
 {:else if !loading && !$userIsSignedIn}
   <div class="not-signed">
     <Lifesaver size={32} />
@@ -62,7 +57,7 @@
 
 <style>
   .content {
-    margin-top: 100px;
+    margin-top: 130px;
   }
   .text {
     display: flex;

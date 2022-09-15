@@ -5,7 +5,6 @@
     </div>
 </div>
 
-
 <style>
     .content {
         width: 100%;
