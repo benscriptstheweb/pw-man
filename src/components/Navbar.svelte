@@ -10,7 +10,6 @@
 
   export let publisherName: string;
   export let adminStatus = false;
-  export let displayTag = false;
 
   onMount(() => {
     if (publisherName === undefined) {
@@ -24,7 +23,7 @@
   };
 
   $: selectedRoute = (routeId: string) => {
-    return $page.routeId === routeId ? 'border-bottom: 2px solid black' : '';
+    return $page.routeId === routeId ? 'color: #77b888' : '';
   };
 
   const gotoRoute = (routeId: string) => {
@@ -66,29 +65,28 @@
     {/if}
   </div>
 
-  {#if displayTag}
-    <div class="name-tag">
-      {#if adminStatus}
-        <Tag type="green">Admin</Tag>
-      {:else}
-        <Tag type="cyan">{publisherName}</Tag>
-      {/if}
-    </div>
-  {/if}
+  <div class="name-tag">
+    {#if adminStatus}
+      <Tag type="green">Admin</Tag>
+    {:else}
+      <Tag type="cyan">{publisherName}</Tag>
+    {/if}
+  </div>
 </div>
 
 <style>
   .container {
     position: fixed;
     top: 0;
-    height: 70px !important;
+    height: 80px;
     background-color: rgba(255, 255, 255, 0.7);
     backdrop-filter: saturate(0.5) blur(5px);
     width: 100%;
-    height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(214, 224, 227);
   }
 
   .btn {
@@ -97,8 +95,7 @@
     align-items: center;
     margin: 20px;
     cursor: pointer;
-    transition: 0.2s;
-    border-bottom: var(--is-selected);
+    transition: 0.1s;
   }
 
   .btn p {
@@ -111,10 +108,10 @@
   }
 
   .btn:hover {
-    border-bottom: 2px solid black;
+    color: #77b888;
   }
 
   .name-tag {
-    margin: 15px;
+    margin: 20px;
   }
 </style>

@@ -1,5 +1,5 @@
 <script>
-  import { Button, Form, Loading, TextInput, ToastNotification } from 'carbon-components-svelte';
+  import { Button, Form, TextInput, ToastNotification } from 'carbon-components-svelte';
   import { signInWithEmailAndPassword } from 'firebase/auth';
   import Add from 'carbon-icons-svelte/lib/Add.svelte';
   import { auth } from '../stores/auth';
@@ -10,11 +10,8 @@
 
   let email = '';
   let password = '';
-  let loading = false;
 
   const login = () => {
-    loading = true;
-
     signInWithEmailAndPassword($auth, email, password)
       .then(() => {
         email = '';
@@ -23,7 +20,7 @@
         dispatch('signedInWithAuth');
       })
       .catch(() => {
-        loading = false;
+        // do this
       });
   };
 
@@ -48,10 +45,6 @@
     hidden = event.detail.hidden;
   };
 </script>
-
-{#if loading}
-  <Loading />
-{/if}
 
 {#if success}
   <div class="success">

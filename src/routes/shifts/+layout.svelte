@@ -5,45 +5,52 @@
   import {
     publishers,
     adminStatus,
-    loading,
     userIsSignedIn,
     isRegistered,
   } from '../../stores/publishers';
   import { getSignedInUser } from '../../controllers/publishers';
   import { Lifesaver } from 'carbon-icons-svelte';
   import { Loading } from 'carbon-components-svelte';
+  import Navbar from '../../components/Navbar.svelte';
 
+  let publisherName: string;
   let publisher;
 
+  let loading = true;
+
   onMount(async () => {
-    onAuthStateChanged($auth, async (sameUser) => {
+    onAuthStateChanged($auth, (sameUser) => {
       if (sameUser) {
         userIsSignedIn.set(true);
       }
     });
-
-    if ($auth.currentUser === null) {
-      userIsSignedIn.set(false);
-    } else {
+    
+    // If routes are visited without authentication.
+    if ($auth.currentUser !== null) {
       publisher = await getSignedInUser($auth.currentUser);
       isRegistered.set($publishers.some((e) => e.email === $auth.currentUser.email) ? true : false);
-      adminStatus.set(publisher?.role === 0);
+      
+      publisherName = publisher.text;
+      adminStatus.set(publisher.role === 0);
     }
 
-    $loading = false;
+    loading = false;
   });
 </script>
 
-{#if $loading}
+{#if loading}
   <Loading />
-{:else if !$loading && $userIsSignedIn && $isRegistered}
-  <slot />
-{:else if !$loading && !$userIsSignedIn}
+{:else if !loading && $userIsSignedIn && $isRegistered}
+  <Navbar {publisherName} adminStatus={$adminStatus} />
+  <div class="content">
+    <slot />
+  </div>
+{:else if !loading && !$userIsSignedIn}
   <div class="not-signed">
     <Lifesaver size={32} />
     <h2 class="text">501</h2>
   </div>
-{:else if !$loading && !$isRegistered}
+{:else if !loading && !$isRegistered}
   <div class="not-signed">
     <h2 class="text">Please wait</h2>
     <p class="text">
@@ -53,11 +60,16 @@
 {/if}
 
 <style>
+  .content {
+    margin-top: 130px;
+  }
   .text {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin: 10px;
+    padding: 10px;
   }
   .not-signed {
     display: flex;
