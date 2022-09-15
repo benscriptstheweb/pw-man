@@ -25,11 +25,15 @@
       }
     });
     
-    publisher = await getSignedInUser($auth.currentUser);
-    isRegistered.set($publishers.some((e) => e.email === $auth.currentUser.email) ? true : false);
-    
-    publisherName = publisher.text;
-    adminStatus.set(publisher.role === 0);
+    // If routes are visited without authentication.
+    if ($auth.currentUser !== null) {
+      publisher = await getSignedInUser($auth.currentUser);
+      isRegistered.set($publishers.some((e) => e.email === $auth.currentUser.email) ? true : false);
+      
+      publisherName = publisher.text;
+      adminStatus.set(publisher.role === 0);
+    }
+
     loading = false;
   });
 </script>
@@ -64,6 +68,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin: 10px;
+    padding: 10px;
   }
   .not-signed {
     display: flex;
