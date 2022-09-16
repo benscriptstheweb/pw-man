@@ -81,6 +81,8 @@
     height: 80px;
     background-color: rgba(255, 255, 255, 0.7);
     backdrop-filter: saturate(0.5) blur(5px);
+    -webkit-background-color: rgba(255, 255, 255, 0.7);
+    -webkit-backdrop-filter: saturate(0.5) blur(5px);
     width: 100%;
     display: flex;
     flex-direction: row;
