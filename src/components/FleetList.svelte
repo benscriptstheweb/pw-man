@@ -51,7 +51,7 @@
 <style>
   .shift-fleet {
     position: absolute;
-    top: 10%;
+    top: 20%;
     z-index: 1;
     width: 370px;
     transition: opacity 0.2s ease-in-out;
