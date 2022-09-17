@@ -59,8 +59,9 @@
 
     if (!shiftExists) {
       dateTime = new Date(`${date} ${time}`);
+      let shiftCreator = $auth.currentUser.uid;
 
-      await addPublisherToShift(publisher, dateTime, location);
+      await addPublisherToShift(publisher, dateTime, location, shiftCreator);
 
       $shifts = [
         {
@@ -69,6 +70,7 @@
           publisher: publisher.text,
           date: dateTime,
           location: location,
+          createdBy: shiftCreator,
         },
         ...$shifts,
       ];

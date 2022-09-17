@@ -1,8 +1,8 @@
 <script>
-  import { Column, Grid, Row } from 'carbon-components-svelte';
+  import { Column, Grid, Row, ToastNotification } from 'carbon-components-svelte';
   import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
   import PedestrianFamily from 'carbon-icons-svelte/lib/PedestrianFamily.svelte';
-  import { deleteShift } from '../controllers/publishers';
+  import { deleteShift, getSignedInUser } from '../controllers/publishers';
   import { shifts } from '../stores/shifts';
   import { auth } from '../stores/auth';
   import FleetList from './FleetList.svelte';
@@ -10,6 +10,9 @@
   import Confirm from './Confirm.svelte';
 
   export let adminStatus = false;
+
+  let idToDelete;
+  let error = false;
 
   const removeShift = () => {
     try {
@@ -23,12 +26,10 @@
       setTimeout(() => {
         $shifts = $shifts;
       }, 500);
-    } catch (error) {
-      //todo: implement error handling
+    } catch (err) {
+      error = true;
     }
   };
-
-  let idToDelete;
 
   let confirmVisible;
 
@@ -36,9 +37,16 @@
     confirmVisible = !confirmVisible;
   };
 
-  const confirmDelete = (shiftId) => {
-    toggleConfirmDelete();
-    idToDelete = shiftId;
+  const confirmDelete = async (shift) => {
+    const publisher = await getSignedInUser($auth.currentUser);
+
+    if ($auth.currentUser.uid === shift.createdBy || publisher.role === 0) {
+      toggleConfirmDelete();
+      idToDelete = shift.id;
+    } else {
+      error = true;
+      throw new Error('Unauthorized deletion.');
+    }
   };
 
   let fleetHidden = true;
@@ -63,6 +71,21 @@
   $: sortedShifts = () =>
     adminStatus ? $shifts : $shifts.filter((e) => e.email === $auth.currentUser?.email);
 </script>
+
+<div class="error">
+  {#if error}
+    <ToastNotification
+      timeout={4000}
+      on:close={(e) => {
+        e.preventDefault();
+        error = !error;
+      }}
+      lowContrast
+      kind="error"
+      title="Could not delete."
+      caption="Make sure that this is your shift." />
+  {/if}
+</div>
 
 {#if confirmVisible}
   <Confirm on:deleteConfirmed={removeShift} on:closeForm={toggleConfirmDelete} />
@@ -90,7 +113,7 @@
             })}</Column>
           <Column>{shift.location}</Column>
           <div class="shift-btn-group">
-            <div on:click={() => confirmDelete(shift.id)} class="btn delete-row">
+            <div on:click={() => confirmDelete(shift)} class="btn delete-row">
               <TrashCan />
             </div>
             <div on:click={() => showShiftFleet(shift.date, shift.location)} class="btn expand-row">
@@ -158,5 +181,12 @@
   .date {
     margin-top: 30px;
     font-weight: bold;
+  }
+
+  .error {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
   }
 </style>

@@ -46,12 +46,18 @@ export const createPublisher = async (publisherData) => {
   await addDoc(publisherCollection, publisherData);
 };
 
-export const addPublisherToShift = async (selectedPublisher, selectedDate, selectedLocation) => {
+export const addPublisherToShift = async (
+  selectedPublisher,
+  selectedDate,
+  selectedLocation,
+  shiftCreator
+) => {
   let shift = {
     publisher: selectedPublisher.text,
     email: selectedPublisher.email,
     date: selectedDate,
     location: selectedLocation,
+    createdBy: shiftCreator,
   };
 
   await addDoc(shiftsCollection, shift);
@@ -71,6 +77,7 @@ export const getShifts = async () => {
       publisher: e.data().publisher,
       date: e.data().date.toDate(),
       location: e.data().location,
+      createdBy: e.data().createdBy,
     };
   });
 
