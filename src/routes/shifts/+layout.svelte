@@ -2,12 +2,7 @@
   import { onAuthStateChanged } from 'firebase/auth';
   import { onMount } from 'svelte';
   import { auth } from '../../stores/auth';
-  import {
-    publishers,
-    adminStatus,
-    userIsSignedIn,
-    isRegistered,
-  } from '../../stores/publishers';
+  import { publishers, adminStatus, userIsSignedIn, isRegistered } from '../../stores/publishers';
   import { getSignedInUser } from '../../controllers/publishers';
   import { Lifesaver } from 'carbon-icons-svelte';
   import { Loading } from 'carbon-components-svelte';
@@ -24,12 +19,12 @@
         userIsSignedIn.set(true);
       }
     });
-    
+
     // If routes are visited without authentication.
     if ($auth.currentUser !== null) {
       publisher = await getSignedInUser($auth.currentUser);
       isRegistered.set($publishers.some((e) => e.email === $auth.currentUser.email) ? true : false);
-      
+
       publisherName = publisher?.text;
       adminStatus.set(publisher?.role === 0);
     }

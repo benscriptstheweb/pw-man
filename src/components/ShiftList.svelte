@@ -26,7 +26,7 @@
       setTimeout(() => {
         $shifts = $shifts;
       }, 500);
-    } catch (error) {
+    } catch (err) {
       error = true;
     }
   };
