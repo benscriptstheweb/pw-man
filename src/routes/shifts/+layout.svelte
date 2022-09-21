@@ -4,7 +4,7 @@
   import { auth } from '../../stores/auth';
   import { publishers, adminStatus, userIsSignedIn, isRegistered } from '../../stores/publishers';
   import { getSignedInUser } from '../../controllers/publishers';
-  import { Lifesaver } from 'carbon-icons-svelte';
+  import { Lifesaver, Bicycle } from 'carbon-icons-svelte';
   import { Loading } from 'carbon-components-svelte';
   import Navbar from '../../components/Navbar.svelte';
 
@@ -36,7 +36,7 @@
 {#if loading}
   <Loading />
 {:else if !loading && $userIsSignedIn && $isRegistered}
-  <Navbar {publisherName} adminStatus={$adminStatus} />
+  <Navbar {publisherName} role={publisher?.role} />
   <div class="content">
     <slot />
   </div>
@@ -47,6 +47,7 @@
   </div>
 {:else if !loading && !$isRegistered}
   <div class="not-signed">
+    <Bicycle size={32}/>
     <h2 class="text">Please wait</h2>
     <p class="text">
       Your administrator is completing your registration. Please refresh your page after.
@@ -61,10 +62,8 @@
   .text {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
     margin: 10px;
-    padding: 10px;
+    width: 220px;
   }
   .not-signed {
     display: flex;

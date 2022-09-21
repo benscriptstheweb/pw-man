@@ -9,7 +9,7 @@
   import { signOut } from 'firebase/auth';
 
   export let publisherName: string;
-  export let adminStatus = false;
+  export let role: number;
 
   onMount(() => {
     if (publisherName === undefined) {
@@ -66,10 +66,14 @@
   </div>
 
   <div class="name-tag">
-    {#if adminStatus}
+    {#if role === 0}
       <Tag type="green">Admin</Tag>
     {:else}
-      <Tag type="cyan">{publisherName}</Tag>
+      {#if role === 1}
+        <Tag type="cyan">{publisherName}</Tag>
+      {:else if role === 2}
+        <Tag type="magenta">{publisherName}</Tag>
+      {/if}
     {/if}
   </div>
 </div>
