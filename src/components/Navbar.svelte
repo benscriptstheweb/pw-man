@@ -53,27 +53,16 @@
           <p>Shifts</p>
         </div>
       </div>
-      <div class="locators">
-        <div
-          class="btn"
-          style={selectedRoute('shifts/locations')}
-          on:click={() => gotoRoute('shifts/locations')}>
-          <Map size={20} />
-          <p>Locations</p>
-        </div>
-      </div>
     {/if}
   </div>
 
   <div class="name-tag">
     {#if role === 0}
       <Tag type="green">Admin</Tag>
-    {:else}
-      {#if role === 1}
-        <Tag type="cyan">{publisherName}</Tag>
-      {:else if role === 2}
-        <Tag type="magenta">{publisherName}</Tag>
-      {/if}
+    {:else if role === 1}
+      <Tag type="cyan">{publisherName}</Tag>
+    {:else if role === 2}
+      <Tag type="magenta">{publisherName}</Tag>
     {/if}
   </div>
 </div>
